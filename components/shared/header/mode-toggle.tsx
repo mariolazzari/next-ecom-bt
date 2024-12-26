@@ -1,21 +1,20 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
+  DropdownMenuTrigger,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+} from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
-import { Sun, Moon, SunMoon } from "lucide-react";
+import { SunIcon, MoonIcon, SunMoon } from "lucide-react";
 
-function ToggleTheme() {
-  const { theme, setTheme } = useTheme();
+const ModeToggle = () => {
   const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -35,14 +34,14 @@ function ToggleTheme() {
           {theme === "system" ? (
             <SunMoon />
           ) : theme === "dark" ? (
-            <Moon />
+            <MoonIcon />
           ) : (
-            <Sun />
+            <SunIcon />
           )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Apperance</DropdownMenuLabel>
+        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={theme === "system"}
@@ -65,6 +64,6 @@ function ToggleTheme() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
 
-export default ToggleTheme;
+export default ModeToggle;
