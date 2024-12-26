@@ -1,12 +1,13 @@
 {
   "name": "next-ecom-bt",
-  "version": "0.3.19",
+  "version": "0.3.20",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.4",
