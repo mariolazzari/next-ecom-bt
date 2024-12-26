@@ -1,6 +1,6 @@
 {
   "name": "next-ecom-bt",
-  "version": "0.1.0",
+  "version": "0.2.16",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
+    "@types/node": "^22.10.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
