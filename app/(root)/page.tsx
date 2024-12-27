@@ -1,8 +1,9 @@
 import { getLatestProducts } from "@/lib/actions/product";
 import ProductList from "@/components/shared/product/product-list";
+import { Product } from "@/types";
 
 async function HomePage() {
-  const lastProds = await getLatestProducts();
+  const lastProds: Product[] = await getLatestProducts();
 
   return (
     <>
