@@ -7,7 +7,7 @@ async function HomePage() {
 
   return (
     <>
-      <ProductList title="New Arrivals" data={lastProds} />
+      <ProductList title="New Arrivals" data={lastProds} limit={4} />
     </>
   );
 }

@@ -8,7 +8,7 @@ import { PrismaClient, Product } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function getLatestProducts() {
-  const data = await prisma.product.findMany({
+  const data: Product[] = await prisma.product.findMany({
     take: LATEST_PRODUCTS_LIMIT,
     orderBy: {
       createdAt: "desc",
