@@ -1,14 +1,14 @@
+import { Product } from "@/types";
 import ProductCard from "./product-card";
 
-function ProductList({
-  data,
-  title = "",
-  limit,
-}: {
-  data: any;
-  title?: string;
-  limit?: number;
-}) {
+type Props = {
+  data: Product[];
+} & Partial<{
+  title: string;
+  limit: number;
+}>;
+
+function ProductList({ data, title = "", limit }: Props) {
   const limited = limit ? data.slice(0, limit) : data;
 
   return (
@@ -16,7 +16,7 @@ function ProductList({
       <h2 className="h2-bold mb-4">{title}</h2>
       {limited.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {limited.map((prod: any) => (
+          {limited.map(prod => (
             <ProductCard key={prod.slug} product={prod} />
           ))}
         </div>
