@@ -1,7 +1,7 @@
 {
   "name": "next-ecom-bt",
-  "version": "0.3.25",
-  "private": true,
+  "version": "0.4.30",
+  "private": false,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
