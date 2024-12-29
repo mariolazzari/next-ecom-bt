@@ -21,10 +21,9 @@ export const metadata: Metadata = {
 type Props = PageProps<void, { callbackUrl: string }>;
 
 async function SignInPage({ searchParams }: Props) {
-  const { callbackUrl } = await searchParams;
-
   const session = await auth();
   if (session) {
+    const { callbackUrl } = await searchParams;
     return redirect(callbackUrl || "/");
   }
 

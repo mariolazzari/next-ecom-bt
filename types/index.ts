@@ -4,10 +4,15 @@ import { PropsWithChildren } from "react";
 
 export type Layout = Readonly<PropsWithChildren>;
 
-export type PageProps<TParams, TSearch> = {
+type Params = Record<string, string> | void;
+
+export type PageProps<
+  TParams extends Params,
+  TSearch extends Params
+> = Readonly<{
   params: Promise<TParams>;
   searchParams: Promise<TSearch>;
-};
+}>;
 
 export type ActionResponse = Promise<{
   success: boolean;
