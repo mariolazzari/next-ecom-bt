@@ -7,3 +7,8 @@ export type Product = z.infer<typeof insertProductSchema> & {
   numReviews: number;
   createdAt: Date;
 };
+
+export type ActionResponse = Promise<{
+  success: boolean;
+  message: string;
+}>;
