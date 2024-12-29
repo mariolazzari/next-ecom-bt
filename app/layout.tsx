@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/assets/styles/globals.css";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { ThemeProvider } from "next-themes";
+import { Layout } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,11 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SERVER_URL),
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function RootLayout({ children }: Layout) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
@@ -35,3 +32,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;
