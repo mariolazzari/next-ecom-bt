@@ -3,11 +3,10 @@
 import { signInFormSchema, signUpFormSchema } from "../validators";
 import { signIn, signOut } from "@/auth";
 import { ActionResponse } from "@/types";
-import { PrismaClient } from "@prisma/client";
-import { hashSync } from "bcrypt-ts-edge";
+import { hash } from "bcrypt-ts-edge";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/db/prisma";
+import { formatError } from "../utils";
 
 export async function signInWithCredentials(
   _prevState: unknown,
@@ -49,30 +48,34 @@ export async function signUpUser(_prevState: unknown, formData: FormData) {
       password: formData.get("password"),
       confirmPassword: formData.get("confirmPassword"),
     });
-    const plainPassword = user.password;
-    user.password = hashSync(plainPassword, 10);
 
-    const { name, email, password } = user;
+    const plainPassword = user.password;
+    user.password = await hash(plainPassword, 10);
+
     await prisma.user.create({
-      name,
-      email,
-      password,
+      data: {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      },
     });
 
-    await signIn("credentials", { email, plainPassword });
+    await signIn("credentials", {
+      email: user.email,
+      password: plainPassword,
+    });
 
     return {
       success: true,
-      message: "Signed up successfully",
+      message: "User registered successfully",
     };
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
     }
-
     return {
       success: false,
-      message: "Invalid email or password",
+      message: formatError(error),
     };
   }
 }
