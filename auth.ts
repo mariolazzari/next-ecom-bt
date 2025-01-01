@@ -1,14 +1,11 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
-// import { prisma } from "@/db/prisma";
+import { prisma } from "@/db/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
 
 export const config = {
   pages: {
@@ -137,7 +134,9 @@ export const config = {
       const { pathname } = request.nextUrl;
 
       // Check if user is not authenticated and accessing a protected path
-      if (!auth && protectedPaths.some(p => p.test(pathname))) return false;
+      if (!auth && protectedPaths.some(p => p.test(pathname))) {
+        return false;
+      }
 
       // Check for session cart cookie
       if (!request.cookies.get("sessionCartId")) {
@@ -158,9 +157,8 @@ export const config = {
         response.cookies.set("sessionCartId", sessionCartId);
 
         return response;
-      } else {
-        return true;
       }
+      return true;
     },
   },
 } satisfies NextAuthConfig;
