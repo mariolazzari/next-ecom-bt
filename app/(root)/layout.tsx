@@ -1,12 +1,9 @@
 import "@/assets/styles/globals.css";
 import Footer from "@/components/footer";
 import Header from "@/components/shared/header";
+import { Layout } from "@/types";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function RootLayout({ children }: Layout) {
   return (
     <div className="flex h-screen flex-col">
       <Header />
@@ -15,3 +12,5 @@ export default function RootLayout({
     </div>
   );
 }
+
+export default RootLayout;
