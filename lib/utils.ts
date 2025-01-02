@@ -40,3 +40,16 @@ export function formatError(error: any) {
       : JSON.stringify(error.message);
   }
 }
+
+export function round2(value: string | number) {
+  switch (typeof value) {
+    case "string":
+      return (Math.round(Number(value) + Number.EPSILON) * 100) / 100;
+
+    case "number":
+      return (Math.round(value + Number.EPSILON) * 100) / 100;
+
+    default:
+      throw new Error("Invalid value");
+  }
+}
