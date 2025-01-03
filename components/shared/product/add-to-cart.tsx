@@ -24,7 +24,7 @@ function AddToCart({ item }: Props) {
 
     toast({
       variant: "default",
-      description: `${item.name} added to cart`,
+      description: message,
       action: (
         <ToastAction altText="Go to cart" onClick={() => router.push("/cart")}>
           Go to Cart
