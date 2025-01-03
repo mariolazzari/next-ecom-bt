@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ProductPrice from "@/components/shared/product/product-price";
 import ProductImages from "@/components/shared/product/product-images";
 import AddToCart from "@/components/shared/product/add-to-cart";
+import { getMyCart } from "@/lib/actions/cart";
 
 type Props = {
   params: Promise<{
@@ -19,6 +20,8 @@ async function ProductDetailsPage({ params }: Props) {
   if (!product) {
     notFound();
   }
+
+  const cart = await getMyCart();
 
   return (
     <>
@@ -70,7 +73,7 @@ async function ProductDetailsPage({ params }: Props) {
                 {product.stock > 0 && (
                   <div className="flex-center">
                     <AddToCart
-                      // cart={cart}
+                      cart={cart}
                       item={{
                         productId: product.id,
                         name: product.name,

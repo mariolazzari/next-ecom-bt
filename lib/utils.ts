@@ -53,3 +53,23 @@ export function round2(value: string | number) {
       throw new Error("Invalid value");
   }
 }
+
+const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
+  currency: "USD",
+  style: "currency",
+  minimumFractionDigits: 2,
+});
+
+// Format currency using the formatter above
+export function formatCurrency(amount: number | string | null) {
+  switch (typeof amount) {
+    case "number":
+      return CURRENCY_FORMATTER.format(amount);
+
+    case "string":
+      return CURRENCY_FORMATTER.format(+amount);
+
+    default:
+      return "NaN";
+  }
+}
