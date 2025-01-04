@@ -90,14 +90,6 @@ async function ProductDetailsPage({ params }: Props) {
           </div>
         </div>
       </section>
-      {/* <section className="mt-10">
-        <h2 className="h2-bold mb-5">Customer Reviews</h2>
-        <ReviewList
-          userId={userId || ""}
-          productId={product.id}
-          productSlug={product.slug}
-        />
-      </section> */}
     </>
   );
 }

@@ -92,19 +92,27 @@ export const config = {
 
           if (sessionCartId) {
             const sessionCart = await prisma.cart.findFirst({
-              where: { sessionCartId },
+              where: {
+                sessionCartId,
+              },
             });
 
             if (sessionCart) {
               // Delete current user cart
               await prisma.cart.deleteMany({
-                where: { userId: user.id },
+                where: {
+                  userId: user.id,
+                },
               });
 
               // Assign new cart
               await prisma.cart.update({
-                where: { id: sessionCart.id },
-                data: { userId: user.id },
+                where: {
+                  id: sessionCart.id,
+                },
+                data: {
+                  userId: user.id,
+                },
               });
             }
           }
