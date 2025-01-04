@@ -1,5 +1,7 @@
-import { getMyCart } from "@/lib/actions/cart";
 import { Metadata } from "next";
+
+import { getMyCart } from "@/lib/actions/cart";
+
 import CartTable from "./cart-table";
 
 export const metadata: Metadata = {

@@ -22,20 +22,12 @@ const AddToCart = ({ cart, item }: Props) => {
 
   const handleAddToCart = async () => {
     startTransition(async () => {
-      const res = await addItemToCart(item);
+      const { success, message } = await addItemToCart(item);
 
-      if (!res.success) {
-        toast({
-          variant: "destructive",
-          description: res.message,
-        });
-        return;
-      }
-
-      // Handle success add to cart
       toast({
-        description: res.message,
-        action: (
+        variant: success ? "default" : "destructive",
+        description: message,
+        action: success ? (
           <ToastAction
             className="bg-primary text-white hover:bg-gray-800"
             altText="Go To Cart"
@@ -43,7 +35,7 @@ const AddToCart = ({ cart, item }: Props) => {
           >
             Go To Cart
           </ToastAction>
-        ),
+        ) : undefined,
       });
     });
   };
