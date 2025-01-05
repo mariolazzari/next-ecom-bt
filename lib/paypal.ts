@@ -58,6 +58,7 @@ async function generateAccessToken() {
   });
 
   const jsonData = await handleResponse(response);
+
   return jsonData.access_token;
 }
 
