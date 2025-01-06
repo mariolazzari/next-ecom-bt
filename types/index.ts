@@ -7,6 +7,7 @@ import {
   paymentMethodSchema,
   paymentResultSchema,
   shippingAddressSchema,
+  updateProfileSchema,
 } from "@/lib/validators";
 import { PropsWithChildren } from "react";
 
@@ -58,3 +59,5 @@ export type Order = z.infer<typeof insertOrderSchema> & {
 export type OrderItem = z.infer<typeof cartItemSchema>;
 
 export type PaymentResult = z.infer<typeof paymentResultSchema>;
+
+export type UpdateProfile = z.infer<typeof updateProfileSchema>;
