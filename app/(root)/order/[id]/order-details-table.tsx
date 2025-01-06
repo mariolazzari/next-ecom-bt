@@ -33,7 +33,7 @@ import {
 //   updateOrderToPaidCOD,
 //   deliverOrder,
 // } from "@/lib/actions/order.actions";
-// import StripePayment from "./stripe-payment";
+import StripePayment from "./stripe-payment";
 
 type Props = {
   order: Omit<Order, "paymentResult">;
@@ -254,13 +254,13 @@ function OrderDetailsTable({
               )}
 
               {/* Stripe Payment */}
-              {/* {!isPaid && paymentMethod === "Stripe" && stripeClientSecret && (
+              {!isPaid && paymentMethod === "Stripe" && stripeClientSecret && (
                 <StripePayment
-                  priceInCents={Number(order.totalPrice) * 100}
+                  priceInCents={+order.totalPrice * 100}
                   orderId={order.id}
                   clientSecret={stripeClientSecret}
                 />
-              )} */}
+              )}
 
               {/* Cash On Delivery */}
               {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
