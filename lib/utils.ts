@@ -6,15 +6,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// Convert prisma object into a regular JS object
 export function convertToPlainObject<T>(value: T): T {
   return JSON.parse(JSON.stringify(value));
 }
 
-export function formatNumberWithDecimal(n: number | string): string {
-  const nStr = n === "str" ? n : n.toString();
-  const [int, dec] = nStr.split(".");
-
-  return dec ? `${int}.${dec.padEnd(2, "0")}` : `${int}.00`;
+// Format number with decimal places
+export function formatNumberWithDecimal(num: number): string {
+  const [int, decimal] = num.toString().split(".");
+  return decimal ? `${int}.${decimal.padEnd(2, "0")}` : `${int}.00`;
 }
 
 // Format errors
@@ -42,16 +42,14 @@ export function formatError(error: any) {
   }
 }
 
-export function round2(value: string | number) {
-  switch (typeof value) {
-    case "string":
-      return (Math.round(Number(value) + Number.EPSILON) * 100) / 100;
-
-    case "number":
-      return (Math.round(value + Number.EPSILON) * 100) / 100;
-
-    default:
-      throw new Error("Invalid value");
+// Round number to 2 decimal places
+export function round2(value: number | string) {
+  if (typeof value === "number") {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+  } else if (typeof value === "string") {
+    return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+  } else {
+    throw new Error("Value is not a number or string");
   }
 }
 
@@ -63,15 +61,12 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
 
 // Format currency using the formatter above
 export function formatCurrency(amount: number | string | null) {
-  switch (typeof amount) {
-    case "number":
-      return CURRENCY_FORMATTER.format(amount);
-
-    case "string":
-      return CURRENCY_FORMATTER.format(+amount);
-
-    default:
-      return "NaN";
+  if (typeof amount === "number") {
+    return CURRENCY_FORMATTER.format(amount);
+  } else if (typeof amount === "string") {
+    return CURRENCY_FORMATTER.format(Number(amount));
+  } else {
+    return "NaN";
   }
 }
 
@@ -127,6 +122,7 @@ export const formatDateTime = (dateString: Date) => {
   };
 };
 
+// Form the pagination links
 export function formUrlQuery({
   params,
   key,

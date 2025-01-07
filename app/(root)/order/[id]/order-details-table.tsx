@@ -26,13 +26,9 @@ import {
   approvePayPalOrder,
   createPayPalOrder,
   updateOrderToPaidCOD,
+  deliverOrder,
 } from "@/lib/actions/order";
-// import {
-//   createPayPalOrder,
-//   approvePayPalOrder,
-//   updateOrderToPaidCOD,
-//   deliverOrder,
-// } from "@/lib/actions/order.actions";
+
 import StripePayment from "./stripe-payment";
 
 type Props = {
@@ -131,11 +127,11 @@ function OrderDetailsTable({
         disabled={isPending}
         onClick={() =>
           startTransition(async () => {
-            // const res = await deliverOrder(order.id);
-            // toast({
-            //   variant: res.success ? "default" : "destructive",
-            //   description: res.message,
-            // });
+            const res = await deliverOrder(order.id);
+            toast({
+              variant: res.success ? "default" : "destructive",
+              description: res.message,
+            });
           })
         }
       >
