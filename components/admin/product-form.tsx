@@ -3,10 +3,10 @@
 import { useToast } from "@/hooks/use-toast";
 import { productDefaultValues } from "@/lib/constants";
 import { insertProductSchema, updateProductSchema } from "@/lib/validators";
-import { Product } from "@/types";
+import { InsertProduct, Product } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ControllerRenderProps, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Form,
@@ -26,19 +26,17 @@ import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Checkbox } from "../ui/checkbox";
 
-const ProductForm = ({
-  type,
-  product,
-  productId,
-}: {
+type Props = {
   type: "Create" | "Update";
   product?: Product;
   productId?: string;
-}) => {
+};
+
+const ProductForm = ({ type, product, productId }: Props) => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof insertProductSchema>>({
+  const form = useForm<InsertProduct>({
     resolver:
       type === "Update"
         ? zodResolver(updateProductSchema)
@@ -106,14 +104,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="name"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "name"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Name</FormLabel>
                 <FormControl>
@@ -127,14 +118,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="slug"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "slug"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Name</FormLabel>
                 <FormControl>
@@ -164,14 +148,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="category"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "category"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Category</FormLabel>
                 <FormControl>
@@ -185,14 +162,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="brand"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "brand"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Brand</FormLabel>
                 <FormControl>
@@ -208,14 +178,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="price"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "price"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Price</FormLabel>
                 <FormControl>
@@ -229,14 +192,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="stock"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "stock"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Stock</FormLabel>
                 <FormControl>
@@ -342,14 +298,7 @@ const ProductForm = ({
           <FormField
             control={form.control}
             name="description"
-            render={({
-              field,
-            }: {
-              field: ControllerRenderProps<
-                z.infer<typeof insertProductSchema>,
-                "description"
-              >;
-            }) => (
+            render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Description</FormLabel>
                 <FormControl>
