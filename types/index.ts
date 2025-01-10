@@ -9,6 +9,7 @@ import {
   shippingAddressSchema,
   updateProductSchema,
   updateProfileSchema,
+  updateUserSchema,
 } from "@/lib/validators";
 import { PropsWithChildren } from "react";
 
@@ -65,3 +66,5 @@ export type UpdateProfile = z.infer<typeof updateProfileSchema>;
 
 export type UpdateProduct = z.infer<typeof updateProductSchema>;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
+
+export type UpdateUser = z.infer<typeof updateUserSchema>;

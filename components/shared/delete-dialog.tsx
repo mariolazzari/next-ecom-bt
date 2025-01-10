@@ -15,30 +15,32 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 
-const DeleteDialog = ({
-  id,
-  action,
-}: {
+type Props = {
   id: string;
-  action: (id: string) => Promise<{ success: boolean; message: string }>;
-}) => {
+  action: (id: string) => Promise<{
+    success: boolean;
+    message: string;
+  }>;
+};
+
+const DeleteDialog = ({ id, action }: Props) => {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
 
   const handleDeleteClick = () => {
     startTransition(async () => {
-      const res = await action(id);
+      const { success, message } = await action(id);
 
-      if (!res.success) {
+      if (!success) {
         toast({
           variant: "destructive",
-          description: res.message,
+          description: message,
         });
       } else {
         setOpen(false);
         toast({
-          description: res.message,
+          description: message,
         });
       }
     });
