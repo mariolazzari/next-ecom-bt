@@ -14,15 +14,22 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Pagination from "@/components/shared/pagination";
 import DeleteDialog from "@/components/shared/delete-dialog";
+import { PageProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "Admin Orders",
 };
 
-const AdminOrdersPage = async (props: {
-  searchParams: Promise<{ page: string; query: string }>;
-}) => {
-  const { page = "1", query: searchText } = await props.searchParams;
+type Props = PageProps<
+  void,
+  {
+    page: string;
+    query: string;
+  }
+>;
+
+const AdminOrdersPage = async ({ searchParams }: Props) => {
+  const { page = "1", query: searchText } = await searchParams;
 
   const session = await auth();
 
